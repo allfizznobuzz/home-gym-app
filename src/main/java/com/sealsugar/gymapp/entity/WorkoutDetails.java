@@ -1,18 +1,16 @@
 package com.sealsugar.gymapp.entity;
 
 import lombok.Data;
-import lombok.Getter;
 import lombok.NoArgsConstructor;
-import lombok.RequiredArgsConstructor;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.Transient;
+import javax.persistence.Table;
 
 @NoArgsConstructor
 @Data
-@Entity (name = "workout_details")
+@Entity(name = "workout_details")
+@Table(name = "workout_details")
 public class WorkoutDetails {
 
     @Column(name = "description")
