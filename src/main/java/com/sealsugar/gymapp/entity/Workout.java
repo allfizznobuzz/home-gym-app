@@ -1,10 +1,10 @@
 package com.sealsugar.gymapp.entity;
 
+
 import lombok.*;
 import org.springframework.data.util.ProxyUtils;
 
 import javax.persistence.*;
-
 import java.util.Objects;
 
 import static javax.persistence.GenerationType.SEQUENCE;
