@@ -1,9 +1,7 @@
 package com.sealsugar.gymapp.entity;
 
-
 import lombok.*;
 import org.springframework.data.util.ProxyUtils;
-
 import javax.persistence.*;
 import java.util.Objects;
 
@@ -39,8 +37,8 @@ public class Workout {
             columnDefinition = "TEXT")
     private String workoutName;
 
-    @OneToOne
-    @JoinColumn(name = "workout_details_ID")
+    @OneToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "workout_details_ID", referencedColumnName = "workout_details_ID")
     private WorkoutDetails workoutDetails;
 
     @Column(

@@ -13,7 +13,7 @@ import static javax.persistence.GenerationType.SEQUENCE;
 @Getter
 @Setter
 @ToString
-@Entity(name = "workout_details")
+@Entity
 @Table(name = "workout_details")
 public class WorkoutDetails {
 
@@ -42,28 +42,24 @@ public class WorkoutDetails {
 
     @Column(
             name = "sets",
-            nullable = true,
             columnDefinition = "TEXT"
     )
     private int sets;
 
     @Column(
             name = "reps",
-            nullable = true,
             columnDefinition = "TEXT"
     )
     private int reps;
 
     @Column(
             name = "time_between_sets",
-            nullable = true,
             columnDefinition = "TEXT"
     )
     private int timeBetweenSets;
 
     @Column(
             name = "workout_duration",
-            nullable = true,
             columnDefinition = "TEXT"
     )
     private int workoutDuration;

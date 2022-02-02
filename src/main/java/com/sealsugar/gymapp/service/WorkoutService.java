@@ -15,10 +15,10 @@ public class WorkoutService {
     @Autowired
     WorkoutRepository workoutRepository;
 
-    public Workout getWorkoutByWorkoutId(String workoutId) {
-        Workout workout = null;
+    public Workout getWorkoutByWorkoutId(Long workoutId) {
+        Workout workout;
         try {
-            Optional<Workout> optional = workoutRepository.findByWorkoutId(workoutId);
+            Optional<Workout> optional = workoutRepository.findById(workoutId);
             workout = (optional.orElse(null));
         }
         catch (Exception e) {

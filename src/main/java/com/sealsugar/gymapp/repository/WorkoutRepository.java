@@ -2,9 +2,8 @@ package com.sealsugar.gymapp.repository;
 
 import com.sealsugar.gymapp.entity.Workout;
 import org.springframework.data.repository.CrudRepository;
+import org.springframework.stereotype.Repository;
 
-import java.util.Optional;
-
-public interface WorkoutRepository extends CrudRepository<Workout, String> {
-    Optional<Workout> findByWorkoutId(String workoutId);
+@Repository
+public interface WorkoutRepository extends CrudRepository<Workout, Long> {
 }
