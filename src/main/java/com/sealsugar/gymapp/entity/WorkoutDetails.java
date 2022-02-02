@@ -12,7 +12,6 @@ import static javax.persistence.GenerationType.SEQUENCE;
 @NoArgsConstructor
 @Getter
 @Setter
-@ToString
 @Entity
 @Table(name = "workout_details")
 public class WorkoutDetails {

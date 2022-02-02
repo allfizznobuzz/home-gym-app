@@ -10,7 +10,6 @@ import static javax.persistence.GenerationType.SEQUENCE;
 @NoArgsConstructor
 @Getter
 @Setter
-@ToString
 @Entity
 @Table(name = "workout")
 public class Workout {
