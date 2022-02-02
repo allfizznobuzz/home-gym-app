@@ -11,7 +11,7 @@ import static javax.persistence.GenerationType.SEQUENCE;
 @Getter
 @Setter
 @ToString
-@Entity(name = "workout")
+@Entity
 @Table(name = "workout")
 public class Workout {
 
