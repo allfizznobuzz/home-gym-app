@@ -6,6 +6,8 @@ import com.sealsugar.gymapp.repository.WorkoutRepository;
 import com.sealsugar.gymapp.service.WorkoutService;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
+
 @RestController
 public class WorkoutController {
 
@@ -19,8 +21,12 @@ public class WorkoutController {
 
     @GetMapping(path = "/workout/{workoutId}")
     public Workout getWorkoutByWorkoutId(@PathVariable Long workoutId) {
-
         return workoutService.getWorkoutByWorkoutId(workoutId);
+    }
+
+    @GetMapping(path = "/workouts")
+    public List<Workout> getAllWorkouts() {
+        return workoutService.getAllWorkouts();
     }
 
     @GetMapping(path = "/workout/run")
