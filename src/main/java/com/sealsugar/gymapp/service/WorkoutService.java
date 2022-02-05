@@ -12,7 +12,7 @@ import java.util.Optional;
 
 @Slf4j
 @Service
-public class WorkoutService {
+public class WorkoutService implements ServiceInterface{
 
     @Autowired
     WorkoutRepository workoutRepository;
@@ -41,5 +41,10 @@ public class WorkoutService {
             throw e;
         }
         return workoutList;
+    }
+
+    @Override
+    public void saveWorkouts(List<Workout> workouts) {
+
     }
 }
