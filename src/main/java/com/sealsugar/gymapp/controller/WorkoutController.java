@@ -15,13 +15,14 @@ public class WorkoutController {
         this.workoutService = workoutService;
     }
 
-    @GetMapping(path = "/workout/{workoutId}")
-    public Workout getWorkoutByWorkoutId(@PathVariable Long workoutId) {
-        return workoutService.getWorkoutByWorkoutId(workoutId);
+    @GetMapping(path = "/workout/{workoutName}")
+    public Workout getWorkoutByWorkoutId(@PathVariable String workoutName) {
+        return workoutService.getWorkoutByWorkoutName(workoutName);
     }
 
     @GetMapping(path = "/workouts")
     public List<Workout> getAllWorkouts() {
         return workoutService.getAllWorkouts();
     }
+
 }

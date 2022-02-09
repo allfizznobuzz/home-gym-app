@@ -17,14 +17,14 @@ public class WorkoutService {
     @Autowired
     WorkoutRepository workoutRepository;
 
-    public Workout getWorkoutByWorkoutId(Long workoutId) {
+    public Workout getWorkoutByWorkoutName(String workoutName) {
         Workout workout;
         try {
-            Optional<Workout> workoutOptional = workoutRepository.findById(workoutId);
+            Optional<Workout> workoutOptional = workoutRepository.findWorkoutByWorkoutNameContainsIgnoreCaseOrderByPrimaryWorkoutMuscleGroup(workoutName);
             workout = (workoutOptional.orElse(null));
         }
         catch (Exception e) {
-            log.info("Error while getting Workout from database. Workout ID : {} Exception: {}", workoutId, e);
+            log.info("Error while getting Workout from database. Workout ID : {} Exception: {}", workoutName, e);
             throw e;
         }
         return workout;
