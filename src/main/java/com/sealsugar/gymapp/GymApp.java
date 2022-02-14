@@ -9,10 +9,10 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.Bean;
 
 @SpringBootApplication
-public class GymAppApplication {
+public class GymApp {
 
     public static void main(String[] args) {
-        SpringApplication.run(GymAppApplication.class, args);
+        SpringApplication.run(GymApp.class, args);
     }
 
     @Bean
