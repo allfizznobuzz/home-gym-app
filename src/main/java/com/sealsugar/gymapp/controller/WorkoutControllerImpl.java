@@ -32,6 +32,6 @@ public class WorkoutControllerImpl implements WorkoutController{
         errorDetail.setCode("Code");
         errorDetail.setDescription("Description");
 
-        throw new NotFoundException();
+        throw new NotFoundException(errorDetail);
     }
 }

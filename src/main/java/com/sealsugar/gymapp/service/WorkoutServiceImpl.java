@@ -1,7 +1,6 @@
 package com.sealsugar.gymapp.service;
 
 import com.sealsugar.gymapp.entity.Workout;
-import com.sealsugar.gymapp.exceptions.InternalFailureException;
 import com.sealsugar.gymapp.repository.WorkoutRepository;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
