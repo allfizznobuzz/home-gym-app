@@ -11,16 +11,16 @@ public interface WorkoutService {
 
     /**
      * Returns a list of workouts that contain a given string.
-     * @param workoutName String.
+     * @param workoutId Long.
      * @return List of workouts.
      */
-    List<Workout> getWorkout(String workoutName);
+    Workout getWorkout(Long workoutId);
 
     /**
      * Returns a list of all workouts in the database.
      * @return List of workouts.
      */
-    List<Workout> getAllWorkouts();
+    List<Workout> getAllWorkouts(int page, int elements);
 
     /**
      * Saves a list of workouts to the database.

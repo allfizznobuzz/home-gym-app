@@ -17,12 +17,13 @@ public class WorkoutControllerImpl implements WorkoutController{
         this.workoutService = workoutService;
     }
 
-    public List<Workout> getWorkout(@PathVariable String workoutName) {
-        return workoutService.getWorkout(workoutName);
+    @Override
+    public Workout getWorkout(@PathVariable Long workoutId) {
+        return workoutService.getWorkout(workoutId);
     }
-
-    public List<Workout> getAllWorkouts() {
-        return workoutService.getAllWorkouts();
+    @Override
+    public List<Workout> getAllWorkouts(int page, int elements) {
+        return workoutService.getAllWorkouts(page, elements);
     }
 
     @Override

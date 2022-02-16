@@ -3,6 +3,8 @@ package com.sealsugar.gymapp.service;
 import com.sealsugar.gymapp.entity.Workout;
 import com.sealsugar.gymapp.repository.WorkoutRepository;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
@@ -19,23 +21,28 @@ public class WorkoutServiceImpl implements WorkoutService {
         this.workoutRepository = workoutRepository;
     }
 
-    public List<Workout> getWorkout(String workoutName) {
-        List<Workout> workouts = new ArrayList<>();
+    @Override
+    public Workout getWorkout(Long workoutId) {
+        Workout workout = null;
         try {
-            Iterable<Workout> workoutIterable = workoutRepository.findWorkoutByWorkoutNameContainsIgnoreCaseOrderByPrimaryWorkoutMuscleGroup(workoutName);
-            workoutIterable.forEach(workouts::add);
+            Optional<Workout> workoutOptional = workoutRepository.findById(workoutId);
+            workout = (workoutOptional.orElse(null));
         }
         catch (Exception e) {
-            log.info("Error while getting Workout from database. Workout ID : {} Exception: {}", workoutName, e);
+            log.info("Error while getting Workout from database. Workout ID : {} Exception: {}", workoutId, e);
             throw e;
         }
-        return workouts;
+        return workout;
     }
 
-    public List<Workout> getAllWorkouts() {
+    @Override
+    public List<Workout> getAllWorkouts(int page, int elements) {
         List<Workout> workoutList = new ArrayList<>();
+
+        Pageable requestedPageable = PageRequest.of(page, elements);
+
         try {
-            Iterable<Workout> workoutIterable = workoutRepository.findAll();
+            Iterable<Workout> workoutIterable = workoutRepository.findAll(requestedPageable);
             workoutIterable.forEach(workoutList::add);
         }
         catch (Exception e) {
@@ -45,6 +52,7 @@ public class WorkoutServiceImpl implements WorkoutService {
         return workoutList;
     }
 
+    @Override
     public void saveWorkouts(List<Workout> workouts) {
 
     }
