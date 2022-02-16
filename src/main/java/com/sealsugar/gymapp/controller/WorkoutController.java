@@ -9,11 +9,14 @@ import java.util.List;
 public interface WorkoutController {
 
     @GetMapping(path = "/workout/{workoutName}")
-    public Workout getWorkoutByWorkoutId(@PathVariable String workoutName);
+    List<Workout> getWorkout(@PathVariable String workoutName);
+
+    @GetMapping(path = "/workout/{workoutEquipment}")
+    List<Workout> getWorkout(@PathVariable List<String> workoutEquipment);
 
     @GetMapping(path = "/workouts")
-    public List<Workout> getAllWorkouts();
+    List<Workout> getAllWorkouts();
 
     @GetMapping(path = "/exception")
-    public void testException();
+    void testException();
 }

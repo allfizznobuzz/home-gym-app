@@ -19,17 +19,17 @@ public class WorkoutServiceImpl implements WorkoutService {
         this.workoutRepository = workoutRepository;
     }
 
-    public Workout getWorkout(String workoutName) {
-        Workout workout;
+    public List<Workout> getWorkout(String workoutName) {
+        List<Workout> workouts = new ArrayList<>();
         try {
-            Optional<Workout> workoutOptional = workoutRepository.findWorkoutByWorkoutNameContainsIgnoreCaseOrderByPrimaryWorkoutMuscleGroup(workoutName);
-            workout = (workoutOptional.orElse(null));
+            Iterable<Workout> workoutIterable = workoutRepository.findWorkoutByWorkoutNameContainsIgnoreCaseOrderByPrimaryWorkoutMuscleGroup(workoutName);
+            workoutIterable.forEach(workouts::add);
         }
         catch (Exception e) {
             log.info("Error while getting Workout from database. Workout ID : {} Exception: {}", workoutName, e);
             throw e;
         }
-        return workout;
+        return workouts;
     }
 
     public List<Workout> getAllWorkouts() {

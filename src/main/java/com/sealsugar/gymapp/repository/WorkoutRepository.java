@@ -9,5 +9,5 @@ import java.util.Optional;
 @Repository
 public interface WorkoutRepository extends CrudRepository<Workout, Long> {
 
-    Optional<Workout> findWorkoutByWorkoutNameContainsIgnoreCaseOrderByPrimaryWorkoutMuscleGroup(String workoutName);
+    Iterable<Workout> findWorkoutByWorkoutNameContainsIgnoreCaseOrderByPrimaryWorkoutMuscleGroup(String workoutName);
 }

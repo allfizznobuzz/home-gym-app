@@ -17,7 +17,7 @@ public class WorkoutControllerImpl implements WorkoutController{
         this.workoutService = workoutService;
     }
 
-    public Workout getWorkoutByWorkoutId(@PathVariable String workoutName) {
+    public List<Workout> getWorkout(@PathVariable String workoutName) {
         return workoutService.getWorkout(workoutName);
     }
 
