@@ -1,5 +1,6 @@
 package com.sealsugar.gymapp.controller;
 
+import com.sealsugar.gymapp.Model.ProductCriteria;
 import com.sealsugar.gymapp.entity.Workout;
 import com.sealsugar.gymapp.exceptions.ErrorDetail;
 import com.sealsugar.gymapp.exceptions.NotFoundException;
@@ -9,7 +10,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
-public class WorkoutControllerImpl implements WorkoutController{
+public class WorkoutControllerImpl implements WorkoutController {
 
     WorkoutService workoutService;
 
@@ -21,9 +22,10 @@ public class WorkoutControllerImpl implements WorkoutController{
     public Workout getWorkout(@PathVariable Long workoutId) {
         return workoutService.getWorkout(workoutId);
     }
+
     @Override
-    public List<Workout> getAllWorkouts(int page, int elements) {
-        return workoutService.getAllWorkouts(page, elements);
+    public List<Workout> getAllWorkouts(ProductCriteria productCriteria) {
+        return workoutService.getAllWorkouts(productCriteria);
     }
 
     @Override

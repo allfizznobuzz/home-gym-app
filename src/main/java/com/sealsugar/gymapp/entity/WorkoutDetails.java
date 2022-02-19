@@ -64,13 +64,6 @@ public class WorkoutDetails {
     private int workoutDuration;
 
     @Column(
-            name = "equipment_required",
-            nullable = false,
-            columnDefinition = "TEXT"
-    )
-    private String equipmentRequired;
-
-    @Column(
             name = "workout_example_video_url",
             columnDefinition = "TEXT"
     )

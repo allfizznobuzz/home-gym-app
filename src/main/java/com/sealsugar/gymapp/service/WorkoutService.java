@@ -1,5 +1,6 @@
 package com.sealsugar.gymapp.service;
 
+import com.sealsugar.gymapp.Model.ProductCriteria;
 import com.sealsugar.gymapp.entity.Workout;
 
 import java.util.List;
@@ -20,7 +21,7 @@ public interface WorkoutService {
      * Returns a list of all workouts in the database.
      * @return List of workouts.
      */
-    List<Workout> getAllWorkouts(int page, int elements);
+    List<Workout> getAllWorkouts(ProductCriteria productCriteria);
 
     /**
      * Saves a list of workouts to the database.

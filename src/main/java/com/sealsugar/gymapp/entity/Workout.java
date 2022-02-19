@@ -48,6 +48,13 @@ public class Workout {
     private String workoutLevel;
 
     @Column(
+            name = "equipment_required",
+            nullable = false,
+            columnDefinition = "TEXT"
+    )
+    private String equipmentRequired;
+
+    @Column(
             name = "primary_workout_muscle_group",
             nullable = false,
             columnDefinition = "TEXT"

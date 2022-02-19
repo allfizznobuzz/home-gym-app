@@ -1,5 +1,6 @@
 package com.sealsugar.gymapp.service;
 
+import com.sealsugar.gymapp.Model.ProductCriteria;
 import com.sealsugar.gymapp.entity.Workout;
 import com.sealsugar.gymapp.repository.WorkoutRepository;
 import lombok.extern.slf4j.Slf4j;
@@ -36,13 +37,20 @@ public class WorkoutServiceImpl implements WorkoutService {
     }
 
     @Override
-    public List<Workout> getAllWorkouts(int page, int elements) {
+    public List<Workout> getAllWorkouts(ProductCriteria productCriteria) {
         List<Workout> workoutList = new ArrayList<>();
-
-        Pageable requestedPageable = PageRequest.of(page, elements);
+        Pageable requestedPageable = PageRequest.of(productCriteria.getPage(), productCriteria.getElements());
 
         try {
-            Iterable<Workout> workoutIterable = workoutRepository.findAll(requestedPageable);
+            Iterable<Workout> workoutIterable = workoutRepository.getAllWorkouts(
+//                    requestedPageable,
+                    productCriteria.getWorkoutName(),
+                    productCriteria.getWorkoutLevel(),
+                    productCriteria.getPrimaryWorkoutMuscleGroup(),
+                    productCriteria.getSecondaryWorkoutMuscleGroups(),
+                    productCriteria.getExerciseType(),
+                    productCriteria.getEquipmentRequire()
+            );
             workoutIterable.forEach(workoutList::add);
         }
         catch (Exception e) {

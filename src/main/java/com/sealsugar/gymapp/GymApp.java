@@ -24,7 +24,6 @@ public class GymApp {
             workoutDetails.setDescription("Lay flat on a bench and push the barbell straight away from your chest.");
             workoutDetails.setReps(12);
             workoutDetails.setSets(3);
-            workoutDetails.setEquipmentRequired("Bench, barbell,plates");
             workoutDetails.setWorkoutDuration(30);
             workoutDetails.setTimeBetweenSets(2);
             workoutDetails.setWorkoutExampleVideoUrl("musclebuilder.com/bench-press");
@@ -36,6 +35,7 @@ public class GymApp {
             workout.setPrimaryWorkoutMuscleGroup("Chest");
             workout.setSecondaryWorkoutMuscleGroups("Arms");
             workout.setExerciseType("Strength");
+            workout.setEquipmentRequired("Bench, barbell,plates");
             workout.setWorkoutDetails(workoutDetails);
 
             workoutRepository.save(workout);
