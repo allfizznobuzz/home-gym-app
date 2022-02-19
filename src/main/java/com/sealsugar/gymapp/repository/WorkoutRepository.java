@@ -12,12 +12,12 @@ public interface WorkoutRepository extends PagingAndSortingRepository<Workout, L
 
     @Query(
             value = "SELECT u FROM Workout u " +
-            "WHERE u.workoutName LIKE ?2 " +
-            "AND u.workoutLevel LIKE ?3 " +
-            "AND u.primaryWorkoutMuscleGroup LIKE ?4 " +
-            "AND u.secondaryWorkoutMuscleGroups LIKE ?5 " +
-            "AND u.exerciseType LIKE ?6 " +
-            "AND u.equipmentRequired LIKE ?7 "
+            "WHERE u.workoutName LIKE ?1 " +
+            "AND u.workoutLevel LIKE ?2 " +
+            "AND u.primaryWorkoutMuscleGroup LIKE ?3 " +
+            "AND u.secondaryWorkoutMuscleGroups LIKE ?4 " +
+            "AND u.exerciseType LIKE ?5 " +
+            "AND u.equipmentRequired LIKE ?6 "
     )
     Iterable<Workout> getAllWorkouts(
 //            Pageable pageable,
