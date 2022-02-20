@@ -35,11 +35,30 @@ public class GymApp {
             workout.setPrimaryWorkoutMuscleGroup("Chest");
             workout.setSecondaryWorkoutMuscleGroups("Arms");
             workout.setExerciseType("Strength");
-            workout.setEquipmentRequired("Bench, barbell,plates");
+            workout.setEquipmentRequired("bench, barbell, plates");
             workout.setWorkoutDetails(workoutDetails);
 
-            workoutRepository.save(workout);
+            WorkoutDetails workoutDetails1 = new WorkoutDetails();
 
+            workoutDetails1.setDescription("This is a test.");
+            workoutDetails1.setReps(10);
+            workoutDetails1.setSets(4);
+            workoutDetails1.setWorkoutDuration(30);
+            workoutDetails1.setTimeBetweenSets(2);
+            workoutDetails1.setWorkoutExampleVideoUrl("musclebuilder.com/test");
+
+            Workout workout1 = new Workout();
+
+            workout1.setWorkoutName("Shoulder Press");
+            workout1.setWorkoutLevel("Hard");
+            workout1.setPrimaryWorkoutMuscleGroup("Shoulders");
+            workout1.setSecondaryWorkoutMuscleGroups("Arms");
+            workout1.setExerciseType("Strength");
+            workout1.setEquipmentRequired("barbell, plates");
+            workout1.setWorkoutDetails(workoutDetails1);
+
+            workoutRepository.save(workout);
+            workoutRepository.save(workout1);
         };
     }
 }

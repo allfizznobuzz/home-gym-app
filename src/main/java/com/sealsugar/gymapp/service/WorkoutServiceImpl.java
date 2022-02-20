@@ -40,16 +40,17 @@ public class WorkoutServiceImpl implements WorkoutService {
     public List<Workout> getAllWorkouts(ProductCriteria productCriteria) {
         List<Workout> workoutList = new ArrayList<>();
         Pageable requestedPageable = PageRequest.of(productCriteria.getPage(), productCriteria.getElements());
+        productCriteria.makeAllStringsUpperCase();
 
         try {
             Iterable<Workout> workoutIterable = workoutRepository.getAllWorkouts(
-//                    requestedPageable,
                     productCriteria.getWorkoutName(),
                     productCriteria.getWorkoutLevel(),
                     productCriteria.getPrimaryWorkoutMuscleGroup(),
                     productCriteria.getSecondaryWorkoutMuscleGroups(),
                     productCriteria.getExerciseType(),
-                    productCriteria.getEquipmentRequire()
+                    productCriteria.getEquipmentRequire(),
+                    requestedPageable
             );
             workoutIterable.forEach(workoutList::add);
         }
