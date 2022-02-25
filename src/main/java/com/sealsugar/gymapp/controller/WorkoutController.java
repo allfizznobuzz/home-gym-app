@@ -4,7 +4,6 @@ import com.sealsugar.gymapp.Model.ProductCriteria;
 import com.sealsugar.gymapp.entity.Workout;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestParam;
 
 import javax.validation.Valid;
 import java.util.List;
