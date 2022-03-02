@@ -6,7 +6,10 @@
 	<parent>
 		<groupId>org.springframework.boot</groupId>
 		<artifactId>spring-boot-starter-parent</artifactId>
-		<version>2.6.2</version>
+		<version>2.2.1.RELEASE</version>
+<!--		<version>2.6.2</version> -->
+<!--		Need to upgrade to version 2.6.2. Currently, the latest version is breaking my code.-->
+<!--		@Autowired on the configureGlobal method in WebSecurityConfig.java class does not work.-->
 		<relativePath/> <!-- lookup parent from repository -->
 	</parent>
 
@@ -43,6 +46,7 @@
 			<groupId>org.projectlombok</groupId>
 			<artifactId>lombok</artifactId>
 			<optional>true</optional>
+			<version>1.18.22</version>
 		</dependency>
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
