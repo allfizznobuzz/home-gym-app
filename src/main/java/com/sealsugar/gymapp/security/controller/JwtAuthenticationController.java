@@ -1,56 +1,102 @@
 package com.sealsugar.gymapp.security.controller;
 
-import com.sealsugar.gymapp.security.config.JwtTokenUtil;
-import com.sealsugar.gymapp.security.model.JwtRequest;
-import com.sealsugar.gymapp.security.model.JwtResponse;
-import org.springframework.beans.factory.annotation.Autowired;
+import com.sealsugar.gymapp.security.entity.User;
+import com.sealsugar.gymapp.security.repository.UserRepository;
+import com.sealsugar.gymapp.security.service.JwtUserDetailsService;
+import com.sealsugar.gymapp.security.Util.JwtTokenUtil;
+import lombok.AllArgsConstructor;
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.BadCredentialsException;
 import org.springframework.security.authentication.DisabledException;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
+import org.springframework.security.core.Authentication;
 import org.springframework.security.core.userdetails.UserDetails;
-import org.springframework.security.core.userdetails.UserDetailsService;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.RestController;
 
-import java.util.Objects;
+import java.util.HashMap;
+import java.util.Map;
 
 @RestController
-@CrossOrigin
+@RequestMapping("/auth")
+@AllArgsConstructor
 public class JwtAuthenticationController {
 
-    @Autowired
-    private AuthenticationManager authenticationManager;
+    protected final Log logger = LogFactory.getLog(getClass());
 
-    @Autowired
-    private JwtTokenUtil jwtTokenUtil;
+    final UserRepository userRepository;
+    final AuthenticationManager authenticationManager;
+    final JwtUserDetailsService userDetailsService;
+    final JwtTokenUtil jwtTokenUtil;
 
-    @Autowired
-    private UserDetailsService jwtInMemoryUserDetailsService;
-
-    @RequestMapping(value = "/authenticate", method = RequestMethod.POST)
-    public ResponseEntity<?> generateAuthenticationToken(@RequestBody JwtRequest authenticationRequest)
-            throws Exception {
-
-        authenticate(authenticationRequest.getUsername(), authenticationRequest.getPassword());
-
-        final UserDetails userDetails = jwtInMemoryUserDetailsService
-                .loadUserByUsername(authenticationRequest.getUsername());
-
-        final String token = jwtTokenUtil.generateToken(userDetails);
-
-        return ResponseEntity.ok(new JwtResponse(token));
+    @PostMapping("/login")
+    public ResponseEntity<?> loginUser(
+            @RequestParam("user_name") String username,
+            @RequestParam("password") String password
+    ) {
+        Map<String, Object> responseMap = new HashMap<>();
+        try {
+            Authentication auth = authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(username
+                    , password));
+            if (auth.isAuthenticated()) {
+                logger.info("Logged In");
+                UserDetails userDetails = userDetailsService.loadUserByUsername(username);
+                String token = jwtTokenUtil.generateToken(userDetails);
+                responseMap.put("error", false);
+                responseMap.put("message", "Logged In");
+                responseMap.put("token", token);
+                return ResponseEntity.ok(responseMap);
+            } else {
+                responseMap.put("error", true);
+                responseMap.put("message", "Invalid Credentials");
+                return ResponseEntity.status(401).body(responseMap);
+            }
+        } catch (DisabledException e) {
+            e.printStackTrace();
+            responseMap.put("error", true);
+            responseMap.put("message", "User is disabled");
+            return ResponseEntity.status(500).body(responseMap);
+        } catch (BadCredentialsException e) {
+            responseMap.put("error", true);
+            responseMap.put("message", "Invalid Credentials");
+            return ResponseEntity.status(401).body(responseMap);
+        } catch (Exception e) {
+            e.printStackTrace();
+            responseMap.put("error", true);
+            responseMap.put("message", "Something went wrong");
+            return ResponseEntity.status(500).body(responseMap);
+        }
     }
 
-    private void authenticate(String username, String password) throws Exception {
-        Objects.requireNonNull(username);
-        Objects.requireNonNull(password);
-        try {
-            authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(username, password));
-        } catch (DisabledException e) {
-            throw new Exception("USER_DISABLED", e);
-        } catch (BadCredentialsException e) {
-            throw new Exception("INVALID_CREDENTIALS", e);
-        }
+    @PostMapping("/register")
+    public ResponseEntity<?> saveUser(
+            @RequestParam("first_name") String firstName,
+            @RequestParam("last_name") String lastName,
+            @RequestParam("user_name") String userName,
+            @RequestParam("email") String email,
+            @RequestParam("password") String password
+    ) {
+        Map<String, Object> responseMap = new HashMap<>();
+        User user = new User();
+        user.setFirstName(firstName);
+        user.setLastName(lastName);
+        user.setEmail(email);
+        user.setPassword(new BCryptPasswordEncoder().encode(password));
+        user.setRole("USER");
+        user.setUserName(userName);
+        userRepository.save(user);
+        UserDetails userDetails = userDetailsService.loadUserByUsername(userName);
+        String token = jwtTokenUtil.generateToken(userDetails);
+        responseMap.put("error", false);
+        responseMap.put("username", userName);
+        responseMap.put("message", "Account created successfully");
+        responseMap.put("token", token);
+        return ResponseEntity.ok(responseMap);
     }
 }
