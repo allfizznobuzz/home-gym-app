@@ -48,7 +48,6 @@ public class JwtAuthenticationController {
             Authentication auth = authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(username, password));
 
             if (auth.isAuthenticated()) {
-
                 logger.info("Logged In");
                 UserDetails userDetails = userDetailsService.loadUserByUsername(username);
                 String token = jwtTokenUtil.generateToken(userDetails);
