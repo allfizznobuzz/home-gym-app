@@ -1,6 +1,6 @@
 package com.sealsugar.gymapp.controller;
 
-import com.sealsugar.gymapp.Model.ProductCriteria;
+import com.sealsugar.gymapp.model.ProductCriteria;
 import com.sealsugar.gymapp.entity.Workout;
 import com.sealsugar.gymapp.exceptions.ErrorDetail;
 import com.sealsugar.gymapp.exceptions.NotFoundException;

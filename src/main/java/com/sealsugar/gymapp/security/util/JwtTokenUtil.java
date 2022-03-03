@@ -1,4 +1,4 @@
-package com.sealsugar.gymapp.security.Util;
+package com.sealsugar.gymapp.security.util;
 
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.Jwts;
@@ -17,7 +17,7 @@ import java.util.function.Function;
 @Component
 public class JwtTokenUtil implements Serializable {
 
-    public static final long JWT_TOKEN_VALIDITY = 5 * 60 * 60;
+    public static final long JWT_TOKEN_VALIDITY = (long) 5 * 60 * 60;
 
     Key key = Keys.secretKeyFor(SignatureAlgorithm.HS256);
 

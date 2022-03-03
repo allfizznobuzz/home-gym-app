@@ -1,4 +1,4 @@
-package com.sealsugar.gymapp.Model;
+package com.sealsugar.gymapp.model;
 
 import lombok.Getter;
 import lombok.Setter;

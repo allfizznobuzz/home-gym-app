@@ -22,8 +22,10 @@ public class JwtUserDetailsService implements UserDetailsService {
     }
 
     @Override
-    public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
+    public UserDetails loadUserByUsername(String username) {
         com.sealsugar.gymapp.security.entity.User user = userRepository.findUserByUserName(username);
+        if(user == null) throw new UsernameNotFoundException("Account not found");
+
         List<GrantedAuthority> authorityList = new ArrayList<>();
         authorityList.add(new SimpleGrantedAuthority("USER_ROLE"));
         return new User(user.getUserName(), user.getPassword(), authorityList);

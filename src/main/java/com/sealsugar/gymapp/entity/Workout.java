@@ -32,8 +32,8 @@ public class Workout {
 
     @Column(
             name = "workout_name",
-            nullable = false,
-            columnDefinition = "TEXT")
+            nullable = false
+    )
     private String workoutName;
 
     @OneToOne(cascade = CascadeType.ALL)
@@ -42,36 +42,31 @@ public class Workout {
 
     @Column(
             name = "workout_level",
-            nullable = false,
-            columnDefinition = "TEXT"
+            nullable = false
     )
     private String workoutLevel;
 
     @Column(
             name = "equipment_required",
-            nullable = false,
-            columnDefinition = "TEXT"
+            nullable = false
     )
     private String equipmentRequired;
 
     @Column(
             name = "primary_workout_muscle_group",
-            nullable = false,
-            columnDefinition = "TEXT"
+            nullable = false
     )
     private String primaryWorkoutMuscleGroup;
 
     @Column(
             name = "secondary_workout_muscle_groups",
-            nullable = false,
-            columnDefinition = "TEXT"
+            nullable = false
     )
     private String secondaryWorkoutMuscleGroups;
 
     @Column(
             name = "exercise_type",
-            nullable = false,
-            columnDefinition = "TEXT"
+            nullable = false
     )
     private String exerciseType;
 

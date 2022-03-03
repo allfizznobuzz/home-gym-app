@@ -1,4 +1,4 @@
-package com.sealsugar.gymapp.security.Util;
+package com.sealsugar.gymapp.security.util;
 
 import com.sealsugar.gymapp.security.service.JwtUserDetailsService;
 import io.jsonwebtoken.ExpiredJwtException;
@@ -39,7 +39,7 @@ public class JwtRequestFilter extends OncePerRequestFilter {
                 if (StringUtils.isNotEmpty(username)
                         && null == SecurityContextHolder.getContext().getAuthentication()) {
                     UserDetails userDetails = jwtUserDetailsService.loadUserByUsername(username);
-                    if (jwtTokenUtil.validateToken(jwtToken, userDetails)) {
+                    if (Boolean.TRUE.equals(jwtTokenUtil.validateToken(jwtToken, userDetails))) {
                         UsernamePasswordAuthenticationToken usernamePasswordAuthenticationToken =
                                 new UsernamePasswordAuthenticationToken(
                                         userDetails, null, userDetails.getAuthorities());

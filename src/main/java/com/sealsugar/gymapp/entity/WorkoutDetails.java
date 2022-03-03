@@ -34,38 +34,32 @@ public class WorkoutDetails {
 
     @Column(
             name = "description",
-            nullable = false,
-            columnDefinition = "TEXT"
+            nullable = false
     )
     private String description;
 
     @Column(
-            name = "sets",
-            columnDefinition = "TEXT"
+            name = "sets"
     )
     private int sets;
 
     @Column(
-            name = "reps",
-            columnDefinition = "TEXT"
+            name = "reps"
     )
     private int reps;
 
     @Column(
-            name = "time_between_sets",
-            columnDefinition = "TEXT"
+            name = "time_between_sets"
     )
     private int timeBetweenSets;
 
     @Column(
-            name = "workout_duration",
-            columnDefinition = "TEXT"
+            name = "workout_duration"
     )
     private int workoutDuration;
 
     @Column(
-            name = "workout_example_video_url",
-            columnDefinition = "TEXT"
+            name = "workout_example_video_url"
     )
     private String workoutExampleVideoUrl;
 

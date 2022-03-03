@@ -1,6 +1,6 @@
 package com.sealsugar.gymapp.service;
 
-import com.sealsugar.gymapp.Model.ProductCriteria;
+import com.sealsugar.gymapp.model.ProductCriteria;
 import com.sealsugar.gymapp.entity.Workout;
 
 import java.util.List;

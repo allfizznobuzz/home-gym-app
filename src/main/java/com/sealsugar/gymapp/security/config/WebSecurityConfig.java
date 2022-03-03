@@ -1,6 +1,6 @@
 package com.sealsugar.gymapp.security.config;
 
-import com.sealsugar.gymapp.security.Util.JwtRequestFilter;
+import com.sealsugar.gymapp.security.util.JwtRequestFilter;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;

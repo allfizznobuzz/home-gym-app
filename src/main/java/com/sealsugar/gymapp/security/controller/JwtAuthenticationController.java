@@ -3,7 +3,7 @@ package com.sealsugar.gymapp.security.controller;
 import com.sealsugar.gymapp.security.entity.User;
 import com.sealsugar.gymapp.security.repository.UserRepository;
 import com.sealsugar.gymapp.security.service.JwtUserDetailsService;
-import com.sealsugar.gymapp.security.Util.JwtTokenUtil;
+import com.sealsugar.gymapp.security.util.JwtTokenUtil;
 import lombok.AllArgsConstructor;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
@@ -14,6 +14,7 @@ import org.springframework.security.authentication.DisabledException;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -41,35 +42,32 @@ public class JwtAuthenticationController {
             @RequestParam("password") String password
     ) {
         Map<String, Object> responseMap = new HashMap<>();
+
         try {
-            Authentication auth = authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(username
-                    , password));
+
+            Authentication auth = authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(username, password));
+
             if (auth.isAuthenticated()) {
+
                 logger.info("Logged In");
                 UserDetails userDetails = userDetailsService.loadUserByUsername(username);
                 String token = jwtTokenUtil.generateToken(userDetails);
-                responseMap.put("error", false);
-                responseMap.put("message", "Logged In");
-                responseMap.put("token", token);
+                loginMapper(responseMap, "Logged In", token);
                 return ResponseEntity.ok(responseMap);
             } else {
-                responseMap.put("error", true);
-                responseMap.put("message", "Invalid Credentials");
+                errorMapper(responseMap,  "Invalid Credentials");
                 return ResponseEntity.status(401).body(responseMap);
             }
         } catch (DisabledException e) {
             e.printStackTrace();
-            responseMap.put("error", true);
-            responseMap.put("message", "User is disabled");
+            errorMapper(responseMap,  "User is disabled");
             return ResponseEntity.status(500).body(responseMap);
         } catch (BadCredentialsException e) {
-            responseMap.put("error", true);
-            responseMap.put("message", "Invalid Credentials");
+            errorMapper(responseMap,  "Invalid Credentials");
             return ResponseEntity.status(401).body(responseMap);
         } catch (Exception e) {
             e.printStackTrace();
-            responseMap.put("error", true);
-            responseMap.put("message", "Something went wrong");
+            errorMapper(responseMap,  "Something went wrong");
             return ResponseEntity.status(500).body(responseMap);
         }
     }
@@ -93,10 +91,21 @@ public class JwtAuthenticationController {
         userRepository.save(user);
         UserDetails userDetails = userDetailsService.loadUserByUsername(userName);
         String token = jwtTokenUtil.generateToken(userDetails);
-        responseMap.put("error", false);
+
+        loginMapper(responseMap, "Account created successfully", token);
         responseMap.put("username", userName);
-        responseMap.put("message", "Account created successfully");
-        responseMap.put("token", token);
+
         return ResponseEntity.ok(responseMap);
+    }
+
+    private void loginMapper(Map<String, Object> responseMap, String message, String token) {
+        responseMap.put("error", false);
+        responseMap.put("message", message);
+        responseMap.put("token", token);
+    }
+
+    private void errorMapper(Map<String, Object> responseMap, String message) {
+        responseMap.put("error", true);
+        responseMap.put("message", message);
     }
 }

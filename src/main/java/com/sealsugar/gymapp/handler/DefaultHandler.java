@@ -14,6 +14,6 @@ public class DefaultHandler extends ResponseEntityExceptionHandler {
     @ExceptionHandler(NotFoundException.class)
     //@ResponseStatus(HttpStatus.NOT_FOUND)
     public ResponseEntity<ErrorDetail> handleNotFoundException(NotFoundException exception) {
-        return new ResponseEntity<ErrorDetail>(exception.getErrorDetail(), HttpStatus.BAD_REQUEST);
+        return new ResponseEntity<>(exception.getErrorDetail(), HttpStatus.BAD_REQUEST);
     }
 }
