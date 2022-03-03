@@ -6,6 +6,8 @@ import lombok.Setter;
 
 import javax.persistence.*;
 
+import java.util.Set;
+
 import static javax.persistence.GenerationType.SEQUENCE;
 
 @NoArgsConstructor
@@ -36,4 +38,7 @@ public class Muscle {
             updatable = false
     )
     private String muscleName;
+
+    @ManyToMany(mappedBy = "secondaryWorkoutMuscles")
+    Set<Workout> muscles;
 }

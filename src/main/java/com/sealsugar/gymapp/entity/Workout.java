@@ -4,6 +4,7 @@ import lombok.*;
 import org.springframework.data.util.ProxyUtils;
 import javax.persistence.*;
 import java.util.Objects;
+import java.util.Set;
 
 import static javax.persistence.GenerationType.SEQUENCE;
 
@@ -52,17 +53,17 @@ public class Workout {
     )
     private String equipmentRequired;
 
-    @Column(
-            name = "primary_workout_muscle_group",
-            nullable = false
-    )
-    private String primaryWorkoutMuscleGroup;
+    @OneToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "muscle_ID", referencedColumnName = "muscle_ID")
+    private Muscle primaryWorkoutMuscle;
 
-    @Column(
-            name = "secondary_workout_muscle_groups",
-            nullable = false
+    @ManyToMany
+    @JoinTable(
+            name = "secondary_workout_muscle",
+            joinColumns = @JoinColumn(name = "workout_ID"),
+            inverseJoinColumns = @JoinColumn(name = "muscle_ID")
     )
-    private String secondaryWorkoutMuscleGroups;
+    Set<Muscle> secondaryWorkoutMuscles;
 
     @Column(
             name = "exercise_type",
