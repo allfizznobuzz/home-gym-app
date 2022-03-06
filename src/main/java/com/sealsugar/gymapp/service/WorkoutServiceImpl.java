@@ -41,23 +41,23 @@ public class WorkoutServiceImpl implements WorkoutService {
         List<Workout> workoutList = new ArrayList<>();
         Pageable requestedPageable = PageRequest.of(productCriteria.getPage(), productCriteria.getElements());
         productCriteria.makeAllStringsUpperCase();
-
-        try {
-            Iterable<Workout> workoutIterable = workoutRepository.getAllWorkouts(
-                    productCriteria.getWorkoutName(),
-                    productCriteria.getWorkoutLevel(),
-                    productCriteria.getPrimaryWorkoutMuscleGroup(),
-                    productCriteria.getSecondaryWorkoutMuscleGroups(),
-                    productCriteria.getExerciseType(),
-                    productCriteria.getEquipmentRequire(),
-                    requestedPageable
-            );
-            workoutIterable.forEach(workoutList::add);
-        }
-        catch (Exception e) {
-            log.info("Error while getting Workouts from database. Exception: " + e);
-            throw e;
-        }
+//
+//        try {
+//            Iterable<Workout> workoutIterable = workoutRepository.getAllWorkouts(
+//                    productCriteria.getWorkoutName(),
+//                    productCriteria.getWorkoutLevel(),
+//                    productCriteria.getPrimaryWorkoutMuscleGroup(),
+//                    productCriteria.getSecondaryWorkoutMuscleGroups(),
+//                    productCriteria.getExerciseType(),
+//                    productCriteria.getEquipmentRequire(),
+//                    requestedPageable
+//            );
+//            workoutIterable.forEach(workoutList::add);
+//        }
+//        catch (Exception e) {
+//            log.info("Error while getting Workouts from database. Exception: " + e);
+//            throw e;
+//        }
         return workoutList;
     }
 

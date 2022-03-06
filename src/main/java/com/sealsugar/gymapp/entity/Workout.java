@@ -4,6 +4,7 @@ import lombok.*;
 import org.springframework.data.util.ProxyUtils;
 import javax.persistence.*;
 import java.util.Objects;
+import java.util.Set;
 
 import static javax.persistence.GenerationType.SEQUENCE;
 
@@ -40,35 +41,37 @@ public class Workout {
     @JoinColumn(name = "workout_details_ID", referencedColumnName = "workout_details_ID")
     private WorkoutDetails workoutDetails;
 
-    @Column(
-            name = "workout_level",
-            nullable = false
-    )
-    private String workoutLevel;
+    @OneToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "workout_level_ID", referencedColumnName = "workout_level_ID")
+    private WorkoutLevel workoutLevel;
 
-    @Column(
-            name = "equipment_required",
-            nullable = false
-    )
-    private String equipmentRequired;
+    @OneToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "exercise_equipment_ID", referencedColumnName = "exercise_equipment_ID")
+    private ExerciseEquipment equipmentRequired;
 
-    @Column(
-            name = "primary_workout_muscle_group",
-            nullable = false
+    @ManyToMany
+    @JoinTable(
+            name = "primary_workout_muscles",
+            joinColumns = @JoinColumn(name = "workout_ID"),
+            inverseJoinColumns = @JoinColumn(name = "muscle_ID")
     )
-    private String primaryWorkoutMuscleGroup;
+    Set<Muscle> primaryWorkoutMuscles;
 
-    @Column(
-            name = "secondary_workout_muscle_groups",
-            nullable = false
+    @ManyToMany
+    @JoinTable(
+            name = "secondary_workout_muscles",
+            joinColumns = @JoinColumn(name = "workout_ID"),
+            inverseJoinColumns = @JoinColumn(name = "muscle_ID")
     )
-    private String secondaryWorkoutMuscleGroups;
+    Set<Muscle> secondaryWorkoutMuscles;
 
-    @Column(
-            name = "exercise_type",
-            nullable = false
-    )
-    private String exerciseType;
+    @OneToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "exercise_type_ID", referencedColumnName = "exercise_type_ID")
+    private ExerciseType exerciseType;
+
+    @OneToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "mechanics_type_ID", referencedColumnName = "mechanics_type_ID")
+    private MechanicsType mechanicsType;
 
     @Override
     public boolean equals(Object o) {
