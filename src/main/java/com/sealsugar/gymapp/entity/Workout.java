@@ -49,6 +49,14 @@ public class Workout {
     @JoinColumn(name = "exercise_equipment_ID", referencedColumnName = "exercise_equipment_ID")
     private ExerciseEquipment equipmentRequired;
 
+    @OneToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "exercise_type_ID", referencedColumnName = "exercise_type_ID")
+    private ExerciseType exerciseType;
+
+    @OneToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "mechanics_type_ID", referencedColumnName = "mechanics_type_ID")
+    private MechanicsType mechanicsType;
+
     @ManyToMany
     @JoinTable(
             name = "primary_workout_muscles",
@@ -65,13 +73,13 @@ public class Workout {
     )
     Set<Muscle> secondaryWorkoutMuscles;
 
-    @OneToOne(cascade = CascadeType.ALL)
-    @JoinColumn(name = "exercise_type_ID", referencedColumnName = "exercise_type_ID")
-    private ExerciseType exerciseType;
-
-    @OneToOne(cascade = CascadeType.ALL)
-    @JoinColumn(name = "mechanics_type_ID", referencedColumnName = "mechanics_type_ID")
-    private MechanicsType mechanicsType;
+    @ManyToMany
+    @JoinTable(
+            name = "workouts_by_session",
+            joinColumns = @JoinColumn(name = "workout_ID"),
+            inverseJoinColumns = @JoinColumn(name = "workout_session_ID")
+    )
+    Set<WorkoutSession> workoutSession;
 
     @Override
     public boolean equals(Object o) {
