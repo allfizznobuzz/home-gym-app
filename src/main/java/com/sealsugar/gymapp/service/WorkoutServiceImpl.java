@@ -7,6 +7,7 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -14,6 +15,7 @@ import java.util.Optional;
 
 @Slf4j
 @Service
+@Transactional
 public class WorkoutServiceImpl implements WorkoutService {
 
     WorkoutRepository workoutRepository;
@@ -41,6 +43,7 @@ public class WorkoutServiceImpl implements WorkoutService {
         List<Workout> workoutList = new ArrayList<>();
         Pageable requestedPageable = PageRequest.of(productCriteria.getPage(), productCriteria.getElements());
         productCriteria.makeAllStringsUpperCase();
+
 //
 //        try {
 //            Iterable<Workout> workoutIterable = workoutRepository.getAllWorkouts(
@@ -58,6 +61,7 @@ public class WorkoutServiceImpl implements WorkoutService {
 //            log.info("Error while getting Workouts from database. Exception: " + e);
 //            throw e;
 //        }
+
         return workoutList;
     }
 

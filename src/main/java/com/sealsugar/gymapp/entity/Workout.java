@@ -37,9 +37,36 @@ public class Workout {
     )
     private String workoutName;
 
-    @OneToOne(cascade = CascadeType.ALL)
-    @JoinColumn(name = "workout_details_ID", referencedColumnName = "workout_details_ID")
-    private WorkoutDetails workoutDetails;
+    @Column(
+            name = "description",
+            nullable = false
+    )
+    private String description;
+
+    @Column(
+            name = "sets"
+    )
+    private int sets;
+
+    @Column(
+            name = "reps"
+    )
+    private int reps;
+
+    @Column(
+            name = "time_between_sets"
+    )
+    private int timeBetweenSets;
+
+    @Column(
+            name = "workout_duration"
+    )
+    private int workoutDuration;
+
+    @Column(
+            name = "workout_example_video_url"
+    )
+    private String workoutExampleVideoUrl;
 
     @OneToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "workout_level_ID", referencedColumnName = "workout_level_ID")

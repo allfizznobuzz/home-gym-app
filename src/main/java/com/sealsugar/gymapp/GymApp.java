@@ -1,8 +1,5 @@
 package com.sealsugar.gymapp;
 
-import com.sealsugar.gymapp.entity.Muscle;
-import com.sealsugar.gymapp.entity.Workout;
-import com.sealsugar.gymapp.entity.WorkoutDetails;
 import com.sealsugar.gymapp.repository.WorkoutRepository;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
