@@ -32,11 +32,12 @@ public class WorkoutLevel {
     private long workoutLevelId;
 
     @Column(
-            name = "level"
+            name = "level",
+            columnDefinition = "varchar(255)"
     )
-    private Level level;
+    private String level;
 
-    enum Level {
+    public enum Level {
         BEGINNER, INTERMEDIATE, EXPERT
     }
 }

@@ -5,14 +5,16 @@ import com.sealsugar.gymapp.entity.Workout;
 import com.sealsugar.gymapp.exceptions.ErrorDetail;
 import com.sealsugar.gymapp.exceptions.NotFoundException;
 import com.sealsugar.gymapp.service.WorkoutService;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
+@PreAuthorize("isAuthenticated()")
 @RestController
 public class WorkoutControllerImpl implements WorkoutController {
 
-    WorkoutService workoutService;
+    private final WorkoutService workoutService;
 
     public WorkoutControllerImpl(WorkoutService workoutService) {
         this.workoutService = workoutService;

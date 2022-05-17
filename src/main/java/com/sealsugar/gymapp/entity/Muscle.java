@@ -5,7 +5,6 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import javax.persistence.*;
-import java.util.Set;
 
 import static javax.persistence.GenerationType.SEQUENCE;
 
@@ -33,17 +32,12 @@ public class Muscle {
     private Long muscleId;
 
     @Column(
-            name = "muscle_name"
+            name = "muscle_name",
+            columnDefinition = "varchar(255)"
     )
-    private Muscles muscleName;
+    private String muscleName;
 
-    @ManyToMany(mappedBy = "primaryWorkoutMuscles")
-    Set<Workout> primaryMuscles;
-
-    @ManyToMany(mappedBy = "secondaryWorkoutMuscles")
-    Set<Workout> secondaryMuscles;
-
-    enum Muscles {
+    public enum MuscleType {
         CHEST, LOWER_CHEST, MIDDLE_CHEST, UPPER_CHEST,
         FOREARMS, LATS, MIDDLE_BACK, LOWER_BACK, NECK,
         QUADRICEPS, HAMSTRINGS, CALVES, TRICEPS, TRAPS,

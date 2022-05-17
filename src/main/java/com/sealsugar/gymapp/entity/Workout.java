@@ -81,8 +81,8 @@ public class Workout {
     private ExerciseType exerciseType;
 
     @OneToOne(cascade = CascadeType.ALL)
-    @JoinColumn(name = "mechanics_type_ID", referencedColumnName = "mechanics_type_ID")
-    private MechanicsType mechanicsType;
+    @JoinColumn(name = "mechanics_ID", referencedColumnName = "mechanics_ID")
+    private Mechanics mechanics;
 
     @ManyToMany
     @JoinTable(
@@ -90,7 +90,7 @@ public class Workout {
             joinColumns = @JoinColumn(name = "workout_ID"),
             inverseJoinColumns = @JoinColumn(name = "muscle_ID")
     )
-    Set<Muscle> primaryWorkoutMuscles;
+    private Set<Muscle> primaryWorkoutMuscles;
 
     @ManyToMany
     @JoinTable(
@@ -98,7 +98,7 @@ public class Workout {
             joinColumns = @JoinColumn(name = "workout_ID"),
             inverseJoinColumns = @JoinColumn(name = "muscle_ID")
     )
-    Set<Muscle> secondaryWorkoutMuscles;
+    private Set<Muscle> secondaryWorkoutMuscles;
 
     @ManyToMany
     @JoinTable(
@@ -106,7 +106,7 @@ public class Workout {
             joinColumns = @JoinColumn(name = "workout_ID"),
             inverseJoinColumns = @JoinColumn(name = "workout_session_ID")
     )
-    Set<WorkoutSession> workoutSession;
+    private Set<WorkoutSession> workoutSession;
 
     @Override
     public boolean equals(Object o) {

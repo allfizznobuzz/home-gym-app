@@ -20,13 +20,15 @@ public class ProductCriteria {
     private String secondaryWorkoutMuscleGroups = "";
     private String exerciseType = "";
     private String equipmentRequire = "";
+    private String mechanicsType = "";
 
-    public void makeAllStringsUpperCase() {
+    public void upperCaseProductCriteria() {
         workoutName = workoutName.toUpperCase(Locale.ROOT);
         workoutLevel = workoutLevel.toUpperCase(Locale.ROOT);
         primaryWorkoutMuscleGroup = primaryWorkoutMuscleGroup.toUpperCase(Locale.ROOT);
         secondaryWorkoutMuscleGroups = secondaryWorkoutMuscleGroups.toUpperCase(Locale.ROOT);
         exerciseType = exerciseType.toUpperCase(Locale.ROOT);
         equipmentRequire = equipmentRequire.toUpperCase(Locale.ROOT);
+        mechanicsType = mechanicsType.toUpperCase(Locale.ROOT);
     }
 }

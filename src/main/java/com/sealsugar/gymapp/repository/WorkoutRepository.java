@@ -12,22 +12,31 @@ import java.util.List;
 @Repository
 public interface WorkoutRepository extends JpaRepository<Workout, Long> {
 
-//    @Query(
-//            value = "SELECT u FROM Workout u " +
-//            "WHERE UPPER(u.workoutName) LIKE %?1% " +
-//            "AND UPPER(u.workoutLevel) LIKE %?2% " +
-//            "AND UPPER(u.primaryWorkoutMuscleGroup) LIKE %?3% " +
-//            "AND UPPER(u.secondaryWorkoutMuscleGroups) LIKE %?4% " +
-//            "AND UPPER(u.exerciseType) LIKE %?5% " +
-//            "AND UPPER(u.equipmentRequired) LIKE %?6% "
-//    )
-//    List<Workout> getAllWorkouts(
-//            @Param("workout_name") String workoutName,
-//            @Param("workout_level") String workoutLevel,
-//            @Param("primary_workout_muscle_group") String primaryWorkoutMuscleGroup,
-//            @Param("secondary_workout_muscle_groups") String secondaryWorkoutMuscleGroups,
-//            @Param("exercise_type") String exerciseType,
-//            @Param("equipment_required") String equipmentRequired,
-//            Pageable pageable
-//    );
+    @Query(
+            value =
+            "SELECT u, e, l, r, t, p, s FROM Workout u " +
+            "JOIN u.exerciseType e " +
+            "JOIN u.workoutLevel l " +
+            "JOIN u.equipmentRequired r " +
+            "JOIN u.mechanics t " +
+            "JOIN u.primaryWorkoutMuscles p " +
+            "JOIN u.secondaryWorkoutMuscles s " +
+            "WHERE UPPER(u.workoutName) LIKE %?1% " +
+            "AND UPPER(l.level) LIKE %?2% " +
+            "AND UPPER(p.muscleName) LIKE %?3% " +
+            "AND UPPER(s.muscleName) LIKE %?4% " +
+            "AND UPPER(e.type) LIKE %?5% " +
+            "AND UPPER(r.equipment) LIKE %?6% " +
+            "AND UPPER(t.mechanicsType) LIKE %?7% "
+    )
+    List<Workout> getAllWorkouts(
+            @Param("workout_name") String workoutName,
+            @Param("level") String workoutLevel,
+            @Param("muscle_name") String primaryWorkoutMuscleGroup,
+            @Param("muscle_name") String secondaryWorkoutMuscleGroups,
+            @Param("type") String exerciseType,
+            @Param("equipment") String equipmentRequired,
+            @Param("mechanics_type") String mechanicsType,
+            Pageable pageable
+    );
 }

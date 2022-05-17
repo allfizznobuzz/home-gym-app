@@ -32,11 +32,12 @@ public class ExerciseType {
     private Long exerciseTypeId;
 
     @Column(
-            name = "type"
+            name = "type",
+            columnDefinition = "varchar(255)"
     )
-    private Type type;
+    private String type;
 
-    enum Type {
+    public enum Exercise {
         CARDIO, OLYMPIC_WEIGHTLIFTING, PLYOMETRICS, POWERLIFTING, STRENGTH, STRETCHING, STRONGMAN
     }
 }

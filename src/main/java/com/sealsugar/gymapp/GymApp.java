@@ -1,10 +1,14 @@
 package com.sealsugar.gymapp;
 
+import com.sealsugar.gymapp.entity.*;
 import com.sealsugar.gymapp.repository.WorkoutRepository;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.Bean;
+
+import java.util.HashSet;
+import java.util.Set;
 
 @SpringBootApplication
 public class GymApp {
@@ -16,47 +20,54 @@ public class GymApp {
     @Bean
     public CommandLineRunner startupData(final WorkoutRepository workoutRepository) {
         return args -> {
+
+            WorkoutLevel workoutLevel = new WorkoutLevel();
+            ExerciseType exerciseType = new ExerciseType();
+            ExerciseEquipment exerciseEquipment = new ExerciseEquipment();
+            Mechanics mechanics = new Mechanics();
+            Muscle muscle = new Muscle();
+            Set<Muscle> muscles = new HashSet();
+
+            Workout workoutOne = new Workout();
+            workoutLevel.setLevel("Medium");
+            exerciseType.setType("Strength");
+            exerciseEquipment.setEquipment("bench, barbell, plates");
+            mechanics.setMechanicsType("Compound");
+            muscle.setMuscleName("Chest");
+            muscle.setMuscleId(1L);
+            muscles.add(muscle);
+
+            workoutOne.setWorkoutName("Bench Press");
+            workoutOne.setDescription("Sit on the bench and push a bar up");
+            workoutOne.setSets(3);
+            workoutOne.setReps(9);
+            workoutOne.setTimeBetweenSets(60);
+            workoutOne.setWorkoutDuration(30);
+            workoutOne.setWorkoutExampleVideoUrl("www.test.com");
+            workoutOne.setWorkoutLevel(workoutLevel);
+            workoutOne.setExerciseType(exerciseType);
+            workoutOne.setEquipmentRequired(exerciseEquipment);
+            workoutOne.setMechanics(mechanics);
+            workoutOne.setPrimaryWorkoutMuscles(muscles);
+            workoutOne.setSecondaryWorkoutMuscles(muscles);
 //
-//            WorkoutDetails workoutDetails = new WorkoutDetails();
+//            Workout workoutTwo = new Workout();
+//            workoutLevel.setLevel(WorkoutLevel.Level.INTERMEDIATE);
+//            exerciseType.setType(ExerciseType.Type.STRENGTH);
+//            exerciseEquipment.setEquipment("barbell, plates");
+//            mechanicsType.setType(MechanicsType.Type.COMPOUND);
 //
-//            workoutDetails.setDescription("Lay flat on a bench and push the barbell straight away from your chest.");
-//            workoutDetails.setReps(12);
-//            workoutDetails.setSets(3);
-//            workoutDetails.setWorkoutDuration(30);
-//            workoutDetails.setTimeBetweenSets(2);
-//            workoutDetails.setWorkoutExampleVideoUrl("musclebuilder.com/bench-press");
+//            workoutTwo.setWorkoutName("Shoulder Press");
+//            workoutTwo.setDescription("Stand up and push a bar over your head");
+//            workoutTwo.setWorkoutLevel(workoutLevel);
+//            workoutTwo.setExerciseType(exerciseType);
+//            workoutTwo.setEquipmentRequired(exerciseEquipment);
+//            workoutTwo.setMechanicsType(mechanicsType);
+//            workoutTwo.setPrimaryWorkoutMuscles(muscles);
+//            workoutTwo.setSecondaryWorkoutMuscles(muscles);
 //
-//            Workout workout = new Workout();
-//
-//            workout.setWorkoutName("Bench Press");
-//            workout.setWorkoutLevel("Medium");
-//            workout.setPrimaryWorkoutMuscleGroup("Chest");
-//            workout.setSecondaryWorkoutMuscleGroups("Arms");
-//            workout.setExerciseType("Strength");
-//            workout.setEquipmentRequired("bench, barbell, plates");
-//            workout.setWorkoutDetails(workoutDetails);
-//
-//            WorkoutDetails workoutDetails1 = new WorkoutDetails();
-//
-//            workoutDetails1.setDescription("This is a test.");
-//            workoutDetails1.setReps(10);
-//            workoutDetails1.setSets(4);
-//            workoutDetails1.setWorkoutDuration(30);
-//            workoutDetails1.setTimeBetweenSets(2);
-//            workoutDetails1.setWorkoutExampleVideoUrl("musclebuilder.com/test");
-//
-//            Workout workout1 = new Workout();
-//
-//            workout1.setWorkoutName("Shoulder Press");
-//            workout1.setWorkoutLevel("Hard");
-//            workout1.setPrimaryWorkoutMuscleGroup("Shoulders");
-//            workout1.setSecondaryWorkoutMuscleGroups("Arms");
-//            workout1.setExerciseType("Strength");
-//            workout1.setEquipmentRequired("barbell, plates");
-//            workout1.setWorkoutDetails(workoutDetails1);
-//
-//            workoutRepository.save(workout);
-//            workoutRepository.save(workout1);
+            workoutRepository.save(workoutOne);
+//            workoutRepository.save(workoutTwo);
         };
     }
 }

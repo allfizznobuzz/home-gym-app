@@ -12,31 +12,32 @@ import static javax.persistence.GenerationType.SEQUENCE;
 @Getter
 @Setter
 @Entity
-@Table(name = "mechanics_type")
-public class MechanicsType {
+@Table(name = "mechanics")
+public class Mechanics {
 
     @Id
     @SequenceGenerator(
-            name = "mechanics_type_sequence",
-            sequenceName = "mechanics_type_sequence",
+            name = "mechanics_sequence",
+            sequenceName = "mechanics_sequence",
             allocationSize = 1
     )
     @GeneratedValue(
             strategy = SEQUENCE,
-            generator = "mechanics_type_sequence"
+            generator = "mechanics_sequence"
     )
     @Column(
-            name = "mechanics_type_ID",
+            name = "mechanics_ID",
             updatable = false
     )
-    private Long mechanicsTypeId;
+    private Long mechanicsId;
 
     @Column(
-            name = "type"
+            name = "type",
+            columnDefinition = "varchar(255)"
     )
-    private Type type;
+    private String mechanicsType;
 
-    enum Type {
+    public enum MechanicsType {
         COMPOUND, ISOLATION, NOT_APPLICABLE
     }
 }

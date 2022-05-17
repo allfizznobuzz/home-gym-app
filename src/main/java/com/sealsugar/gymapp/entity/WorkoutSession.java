@@ -39,5 +39,5 @@ public class WorkoutSession {
     private String workoutSessionName;
 
     @ManyToMany(mappedBy = "workoutSession")
-    Set<Workout> workouts;
+    private Set<Workout> workouts;
 }
