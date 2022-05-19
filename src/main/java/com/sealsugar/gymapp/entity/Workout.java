@@ -39,7 +39,8 @@ public class Workout {
 
     @Column(
             name = "description",
-            nullable = false
+            nullable = false,
+            columnDefinition = "varchar(500)"
     )
     private String description;
 
@@ -73,10 +74,6 @@ public class Workout {
     private WorkoutLevel workoutLevel;
 
     @OneToOne(cascade = CascadeType.ALL)
-    @JoinColumn(name = "exercise_equipment_ID", referencedColumnName = "exercise_equipment_ID")
-    private ExerciseEquipment equipmentRequired;
-
-    @OneToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "exercise_type_ID", referencedColumnName = "exercise_type_ID")
     private ExerciseType exerciseType;
 
@@ -91,6 +88,14 @@ public class Workout {
             inverseJoinColumns = @JoinColumn(name = "muscle_ID")
     )
     private Set<Muscle> primaryWorkoutMuscles;
+
+    @ManyToMany
+    @JoinTable(
+            name = "exercise_equipment_for_workout",
+            joinColumns = @JoinColumn(name = "workout_ID"),
+            inverseJoinColumns = @JoinColumn(name = "exercise_equipment_ID")
+    )
+    private Set<ExerciseEquipment> equipmentRequired;
 
     @ManyToMany
     @JoinTable(
