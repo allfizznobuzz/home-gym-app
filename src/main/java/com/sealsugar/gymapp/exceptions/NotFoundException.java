@@ -1,6 +1,11 @@
 package com.sealsugar.gymapp.exceptions;
 
+import lombok.Builder;
+
 public class NotFoundException extends BaseException {
-    public NotFoundException(ErrorDetail errorDetail) {
+
+    @Builder
+    public NotFoundException(String message, Throwable cause, ErrorDetail errorDetail) {
+        super(message, cause, errorDetail);
     }
 }

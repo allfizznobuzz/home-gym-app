@@ -1,6 +1,7 @@
 package com.sealsugar.gymapp.handler;
 
 import com.sealsugar.gymapp.exceptions.ErrorDetail;
+import com.sealsugar.gymapp.exceptions.InternalFailureException;
 import com.sealsugar.gymapp.exceptions.NotFoundException;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -15,5 +16,11 @@ public class DefaultHandler extends ResponseEntityExceptionHandler {
     //@ResponseStatus(HttpStatus.NOT_FOUND)
     public ResponseEntity<ErrorDetail> handleNotFoundException(NotFoundException exception) {
         return new ResponseEntity<>(exception.getErrorDetail(), HttpStatus.BAD_REQUEST);
+    }
+
+    @ExceptionHandler(InternalFailureException.class)
+    //@ResponseStatus(HttpStatus.NOT_FOUND)
+    public ResponseEntity<ErrorDetail> handleInternalFailureException(InternalFailureException exception) {
+        return new ResponseEntity<>(exception.getErrorDetail(), HttpStatus.INTERNAL_SERVER_ERROR);
     }
 }

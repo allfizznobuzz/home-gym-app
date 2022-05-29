@@ -8,34 +8,32 @@ import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
+import java.util.Set;
 
 @Repository
 public interface WorkoutRepository extends JpaRepository<Workout, Long> {
 
     @Query(
             value =
-            "SELECT u, e, l, r, t, p, s FROM Workout u " +
-            "JOIN u.exerciseType e " +
-            "JOIN u.workoutLevel l " +
+            "SELECT DISTINCT u FROM Workout u " +
             "JOIN u.equipmentRequired r " +
-            "JOIN u.mechanics t " +
             "JOIN u.primaryWorkoutMuscles p " +
             "JOIN u.secondaryWorkoutMuscles s " +
             "WHERE UPPER(u.workoutName) LIKE %?1% " +
-            "AND UPPER(l.level) LIKE %?2% " +
-            "AND UPPER(p.muscleName) LIKE %?3% " +
-            "AND UPPER(s.muscleName) LIKE %?4% " +
-            "AND UPPER(e.type) LIKE %?5% " +
-            "AND UPPER(r.equipment) LIKE %?6% " +
-            "AND UPPER(t.mechanicsType) LIKE %?7% "
+            "OR UPPER(u.workoutLevel.level) LIKE %?2% " +
+            "OR UPPER(p.muscleName) IN ?3 " +
+            "OR UPPER(s.muscleName) IN ?4 " +
+            "OR UPPER(u.exerciseType.type) LIKE %?5% " +
+            "OR UPPER(r.equipment) IN ?6 " +
+            "OR UPPER(u.mechanics.mechanicsType) LIKE %?7% "
     )
     List<Workout> getAllWorkouts(
             @Param("workout_name") String workoutName,
             @Param("level") String workoutLevel,
-            @Param("muscle_name") String primaryWorkoutMuscleGroup,
-            @Param("muscle_name") String secondaryWorkoutMuscleGroups,
+            @Param("muscle_name") Set<String> primaryWorkoutMuscleGroup,
+            @Param("muscle_name") Set<String> secondaryWorkoutMuscleGroups,
             @Param("type") String exerciseType,
-            @Param("equipment") String equipmentRequired,
+            @Param("equipment") Set<String> equipmentRequired,
             @Param("mechanics_type") String mechanicsType,
             Pageable pageable
     );

@@ -2,15 +2,12 @@ package com.sealsugar.gymapp.controller;
 
 import com.sealsugar.gymapp.model.ProductCriteria;
 import com.sealsugar.gymapp.entity.Workout;
-import com.sealsugar.gymapp.exceptions.ErrorDetail;
-import com.sealsugar.gymapp.exceptions.NotFoundException;
 import com.sealsugar.gymapp.service.WorkoutService;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
-@PreAuthorize("isAuthenticated()")
 @RestController
 public class WorkoutControllerImpl implements WorkoutController {
 
@@ -30,13 +27,13 @@ public class WorkoutControllerImpl implements WorkoutController {
         return workoutService.getAllWorkouts(productCriteria);
     }
 
-    @Override
-    public void testException() {
-        ErrorDetail errorDetail = new ErrorDetail();
-
-        errorDetail.setCode("Code");
-        errorDetail.setDescription("Description");
-
-        throw new NotFoundException(errorDetail);
-    }
+//    @Override
+//    public void testException() {
+//        ErrorDetail errorDetail = new ErrorDetail();
+//
+//        errorDetail.setCode("Code");
+//        errorDetail.setDescription("Description");
+//
+//        throw new NotFoundException(errorDetail);
+//    }
 }

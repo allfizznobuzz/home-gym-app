@@ -24,7 +24,8 @@ INSERT INTO muscle (muscle_id, muscle_name) VALUES
 (18, 'BICEPS'),
 (19, 'ADDUCTORS'),
 (20, 'ABDUCTORS'),
-(21, 'OBLIQUES');
+(21, 'OBLIQUES'),
+(22, 'NONE');
 
 INSERT INTO exercise_type (exercise_type_id, type) VALUES
 (1, 'CARDIO'),
@@ -50,7 +51,8 @@ INSERT INTO exercise_equipment (exercise_equipment_id, equipment) VALUES
 (12, 'JUMP ROPE'),
 (13, 'WEIGHT PLATES'),
 (14, 'GYMNASTIC RINGS'),
-(15, 'DIP BAR');
+(15, 'DIP BAR'),
+(16, 'NONE');
 
 INSERT INTO workout_level (workout_level_id, level) VALUES
 (1, 'BEGINNER'),
@@ -80,6 +82,9 @@ INSERT INTO primary_workout_muscles (workout_id, muscle_id) VALUES
 (4, 11);
 
 INSERT INTO secondary_workout_muscles (workout_id, muscle_id) VALUES
+(1, 22),
+(2, 22),
+(4, 22),
 (3, 7),
 (3, 4),
 (3, 15);
@@ -89,4 +94,5 @@ INSERT INTO exercise_equipment_for_workout (workout_id, exercise_equipment_id) V
 (1, 3),
 (1, 13),
 (2, 8),
+(4, 16),
 (3, 14);

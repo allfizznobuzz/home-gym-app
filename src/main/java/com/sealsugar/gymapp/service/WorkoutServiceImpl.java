@@ -1,15 +1,17 @@
 package com.sealsugar.gymapp.service;
 
+import com.sealsugar.gymapp.exceptions.ErrorDetail;
+import com.sealsugar.gymapp.exceptions.InternalFailureException;
 import com.sealsugar.gymapp.model.ProductCriteria;
 import com.sealsugar.gymapp.entity.Workout;
 import com.sealsugar.gymapp.repository.WorkoutRepository;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.dao.DataAccessException;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
@@ -26,41 +28,49 @@ public class WorkoutServiceImpl implements WorkoutService {
 
     @Override
     public Workout getWorkout(Long workoutId) {
-        Workout workout = null;
+        Optional<Workout> workoutOptional;
+        Workout workout;
+
         try {
-            Optional<Workout> workoutOptional = workoutRepository.findById(workoutId);
-            workout = (workoutOptional.orElse(null));
+            workoutOptional = workoutRepository.findById(workoutId);
+        } catch (DataAccessException e) {
+            ErrorDetail errorDetail = ErrorDetail.builder().code("DATABASE_CONNECTION_FAILURE").detail("WORKOUT_ID", workoutId.toString()).detail("ERROR", "DATA_ACCESS_EXCEPTION").build();
+            throw InternalFailureException.builder().errorDetail(errorDetail).cause(e).build();
+        } catch (Exception e) {
+            ErrorDetail errorDetail = ErrorDetail.builder().code("DATABASE_CONNECTION_FAILURE").detail("WORKOUT_ID", workoutId.toString()).detail("ERROR", "UNEXPECTED_ERROR").build();
+            throw InternalFailureException.builder().errorDetail(errorDetail).cause(e).build();
         }
-        catch (Exception e) {
-            log.info("Error while getting Workout from database. Workout ID : {} Exception: {}", workoutId, e);
-            throw e;
-        }
+
+        workout = (workoutOptional.orElse(null));
+
         return workout;
     }
 
     @Override
     public List<Workout> getAllWorkouts(ProductCriteria productCriteria) {
-        List<Workout> workoutList = new ArrayList<>();
         Pageable requestedPageable = PageRequest.of(productCriteria.getPage(), productCriteria.getElements());
         productCriteria.upperCaseProductCriteria();
+        List<Workout> workoutList;
 
         try {
-            Iterable<Workout> workoutIterable = workoutRepository.getAllWorkouts(
+            workoutList = workoutRepository.getAllWorkouts(
                     productCriteria.getWorkoutName(),
                     productCriteria.getWorkoutLevel(),
                     productCriteria.getPrimaryWorkoutMuscleGroup(),
                     productCriteria.getSecondaryWorkoutMuscleGroups(),
                     productCriteria.getExerciseType(),
-                    productCriteria.getEquipmentRequire(),
+                    productCriteria.getEquipmentRequired(),
                     productCriteria.getMechanicsType(),
                     requestedPageable
             );
-            workoutIterable.forEach(workoutList::add);
+        } catch (DataAccessException e) {
+            ErrorDetail errorDetail = ErrorDetail.builder().code("DATABASE_CONNECTION_FAILURE").detail("WORKOUT_NAME", productCriteria.getWorkoutName()).detail("ERROR", "DATA_ACCESS_EXCEPTION").build();
+            throw InternalFailureException.builder().errorDetail(errorDetail).cause(e).build();
+        } catch (Exception e) {
+            ErrorDetail errorDetail = ErrorDetail.builder().code("DATABASE_CONNECTION_FAILURE").detail("WORKOUT_NAME", productCriteria.getWorkoutName()).detail("ERROR", "UNEXPECTED_ERROR").build();
+            throw InternalFailureException.builder().errorDetail(errorDetail).cause(e).build();
         }
-        catch (Exception e) {
-            log.info("Error while getting Workouts from database. Exception: " + e);
-            throw e;
-        }
+
 
         return workoutList;
     }

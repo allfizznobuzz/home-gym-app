@@ -4,7 +4,7 @@ import lombok.Getter;
 import lombok.Setter;
 
 import javax.validation.constraints.Min;
-import java.util.Locale;
+import java.util.*;
 
 @Getter
 @Setter
@@ -16,19 +16,31 @@ public class ProductCriteria {
     private int elements = 50;
     private String workoutName = "";
     private String workoutLevel = "";
-    private String primaryWorkoutMuscleGroup = "";
-    private String secondaryWorkoutMuscleGroups = "";
+    private Set<String> primaryWorkoutMuscleGroup = new HashSet<>();
+    private Set<String> secondaryWorkoutMuscleGroups = new HashSet<>();
     private String exerciseType = "";
-    private String equipmentRequire = "";
+    private Set<String> equipmentRequired = new HashSet<>();
     private String mechanicsType = "";
 
     public void upperCaseProductCriteria() {
         workoutName = workoutName.toUpperCase(Locale.ROOT);
         workoutLevel = workoutLevel.toUpperCase(Locale.ROOT);
-        primaryWorkoutMuscleGroup = primaryWorkoutMuscleGroup.toUpperCase(Locale.ROOT);
-        secondaryWorkoutMuscleGroups = secondaryWorkoutMuscleGroups.toUpperCase(Locale.ROOT);
+        primaryWorkoutMuscleGroup = upperCaseList(primaryWorkoutMuscleGroup);
+        secondaryWorkoutMuscleGroups = upperCaseList(secondaryWorkoutMuscleGroups);
         exerciseType = exerciseType.toUpperCase(Locale.ROOT);
-        equipmentRequire = equipmentRequire.toUpperCase(Locale.ROOT);
+        equipmentRequired = upperCaseList(equipmentRequired);
         mechanicsType = mechanicsType.toUpperCase(Locale.ROOT);
+    }
+
+    public Set<String> upperCaseList(Set<String> set) {
+        if (set.isEmpty()) return new HashSet<>(List.of(""));
+
+        Set<String> newSet = new HashSet<>();
+
+        for (String string : set) {
+            newSet.add(string.toUpperCase(Locale.ROOT));
+        }
+
+        return newSet;
     }
 }

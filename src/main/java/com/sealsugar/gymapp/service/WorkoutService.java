@@ -3,6 +3,7 @@ package com.sealsugar.gymapp.service;
 import com.sealsugar.gymapp.model.ProductCriteria;
 import com.sealsugar.gymapp.entity.Workout;
 
+import java.sql.SQLException;
 import java.util.List;
 
 /**
