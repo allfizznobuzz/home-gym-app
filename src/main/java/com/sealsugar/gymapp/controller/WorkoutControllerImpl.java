@@ -3,7 +3,6 @@ package com.sealsugar.gymapp.controller;
 import com.sealsugar.gymapp.model.ProductCriteria;
 import com.sealsugar.gymapp.entity.Workout;
 import com.sealsugar.gymapp.service.WorkoutService;
-import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -26,14 +25,4 @@ public class WorkoutControllerImpl implements WorkoutController {
     public List<Workout> getAllWorkouts(ProductCriteria productCriteria) {
         return workoutService.getAllWorkouts(productCriteria);
     }
-
-//    @Override
-//    public void testException() {
-//        ErrorDetail errorDetail = new ErrorDetail();
-//
-//        errorDetail.setCode("Code");
-//        errorDetail.setDescription("Description");
-//
-//        throw new NotFoundException(errorDetail);
-//    }
 }
