@@ -13,7 +13,7 @@ public interface WorkoutService {
 
     /**
      * Returns a list of workouts that contain a given string.
-     * @param workoutId Long.
+     * @param
      * @return List of workouts.
      */
     Workout getWorkout(Long workoutId);
@@ -26,7 +26,7 @@ public interface WorkoutService {
 
     /**
      * Saves a list of workouts to the database.
-     * @param workouts List of workouts.
+     * @param workout
      */
-    void saveWorkouts(List<Workout> workouts);
+    void saveWorkout(Workout workout);
 }

@@ -76,7 +76,15 @@ public class WorkoutServiceImpl implements WorkoutService {
     }
 
     @Override
-    public void saveWorkouts(List<Workout> workouts) {
-
+    public void saveWorkout(Workout workout) {
+        try {
+            workoutRepository.save(workout);
+        } catch (DataAccessException e) {
+            ErrorDetail errorDetail = ErrorDetail.builder().code("DATABASE_CONNECTION_FAILURE").detail("WORKOUT_ID", workout.getWorkoutId().toString()).detail("ERROR", "DATA_ACCESS_EXCEPTION").build();
+            throw InternalFailureException.builder().errorDetail(errorDetail).cause(e).build();
+        } catch (Exception e) {
+            ErrorDetail errorDetail = ErrorDetail.builder().code("DATABASE_CONNECTION_FAILURE").detail("WORKOUT_ID", workout.getWorkoutId().toString()).detail("ERROR", "UNEXPECTED_ERROR").build();
+            throw InternalFailureException.builder().errorDetail(errorDetail).cause(e).build();
+        }
     }
 }
