@@ -8,7 +8,7 @@ import java.util.*;
 
 @Getter
 @Setter
-public class ProductCriteria {
+public class SearchProductCriteria {
 
     @Min(0)
     private int page = 0;

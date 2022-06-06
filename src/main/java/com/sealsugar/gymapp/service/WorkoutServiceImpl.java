@@ -2,8 +2,9 @@ package com.sealsugar.gymapp.service;
 
 import com.sealsugar.gymapp.exceptions.ErrorDetail;
 import com.sealsugar.gymapp.exceptions.InternalFailureException;
-import com.sealsugar.gymapp.model.ProductCriteria;
+import com.sealsugar.gymapp.model.SearchProductCriteria;
 import com.sealsugar.gymapp.entity.Workout;
+import com.sealsugar.gymapp.model.WorkoutDTO;
 import com.sealsugar.gymapp.repository.WorkoutRepository;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.dao.DataAccessException;
@@ -47,38 +48,37 @@ public class WorkoutServiceImpl implements WorkoutService {
     }
 
     @Override
-    public List<Workout> getAllWorkouts(ProductCriteria productCriteria) {
-        Pageable requestedPageable = PageRequest.of(productCriteria.getPage(), productCriteria.getElements());
-        productCriteria.upperCaseProductCriteria();
+    public List<Workout> getAllWorkouts(SearchProductCriteria searchProductCriteria) {
+        Pageable requestedPageable = PageRequest.of(searchProductCriteria.getPage(), searchProductCriteria.getElements());
+        searchProductCriteria.upperCaseProductCriteria();
         List<Workout> workoutList;
 
         try {
             workoutList = workoutRepository.getAllWorkouts(
-                    productCriteria.getWorkoutName(),
-                    productCriteria.getWorkoutLevel(),
-                    productCriteria.getPrimaryWorkoutMuscleGroup(),
-                    productCriteria.getSecondaryWorkoutMuscleGroups(),
-                    productCriteria.getExerciseType(),
-                    productCriteria.getEquipmentRequired(),
-                    productCriteria.getMechanicsType(),
+                    searchProductCriteria.getWorkoutName(),
+                    searchProductCriteria.getWorkoutLevel(),
+                    searchProductCriteria.getPrimaryWorkoutMuscleGroup(),
+                    searchProductCriteria.getSecondaryWorkoutMuscleGroups(),
+                    searchProductCriteria.getExerciseType(),
+                    searchProductCriteria.getEquipmentRequired(),
+                    searchProductCriteria.getMechanicsType(),
                     requestedPageable
             );
         } catch (DataAccessException e) {
-            ErrorDetail errorDetail = ErrorDetail.builder().code("DATABASE_CONNECTION_FAILURE").detail("WORKOUT_NAME", productCriteria.getWorkoutName()).detail("ERROR", "DATA_ACCESS_EXCEPTION").build();
+            ErrorDetail errorDetail = ErrorDetail.builder().code("DATABASE_CONNECTION_FAILURE").detail("WORKOUT_NAME", searchProductCriteria.getWorkoutName()).detail("ERROR", "DATA_ACCESS_EXCEPTION").build();
             throw InternalFailureException.builder().errorDetail(errorDetail).cause(e).build();
         } catch (Exception e) {
-            ErrorDetail errorDetail = ErrorDetail.builder().code("DATABASE_CONNECTION_FAILURE").detail("WORKOUT_NAME", productCriteria.getWorkoutName()).detail("ERROR", "UNEXPECTED_ERROR").build();
+            ErrorDetail errorDetail = ErrorDetail.builder().code("DATABASE_CONNECTION_FAILURE").detail("WORKOUT_NAME", searchProductCriteria.getWorkoutName()).detail("ERROR", "UNEXPECTED_ERROR").build();
             throw InternalFailureException.builder().errorDetail(errorDetail).cause(e).build();
         }
-
 
         return workoutList;
     }
 
     @Override
-    public void saveWorkout(Workout workout) {
+    public void saveWorkout(WorkoutDTO workoutDTO) {
         try {
-            workoutRepository.save(workout);
+            workoutRepository.save(workoutDTO);
         } catch (DataAccessException e) {
             ErrorDetail errorDetail = ErrorDetail.builder().code("DATABASE_CONNECTION_FAILURE").detail("WORKOUT_ID", workout.getWorkoutId().toString()).detail("ERROR", "DATA_ACCESS_EXCEPTION").build();
             throw InternalFailureException.builder().errorDetail(errorDetail).cause(e).build();
