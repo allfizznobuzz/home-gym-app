@@ -1,9 +1,9 @@
-package com.sealsugar.gymapp.controller;
+package com.sealsugar.gymapp.controllers;
 
-import com.sealsugar.gymapp.model.SearchProductCriteria;
-import com.sealsugar.gymapp.entity.Workout;
-import com.sealsugar.gymapp.model.WorkoutDTO;
-import com.sealsugar.gymapp.service.WorkoutService;
+import com.sealsugar.gymapp.models.SearchProductCriteria;
+import com.sealsugar.gymapp.entities.Workout;
+import com.sealsugar.gymapp.models.WorkoutDTO;
+import com.sealsugar.gymapp.services.WorkoutService;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -18,16 +18,19 @@ public class WorkoutControllerImpl implements WorkoutController {
     }
 
     @Override
-    public Workout getWorkout(@PathVariable Long workoutId) {
+    @GetMapping(path = "/workout/{workoutId}")
+    public WorkoutDTO getWorkout(@PathVariable Long workoutId) {
         return workoutService.getWorkout(workoutId);
     }
 
     @Override
-    public List<Workout> getAllWorkouts(SearchProductCriteria searchProductCriteria) {
+    @GetMapping(path = "/workouts")
+    public List<WorkoutDTO> getAllWorkouts(SearchProductCriteria searchProductCriteria) {
         return workoutService.getAllWorkouts(searchProductCriteria);
     }
 
     @Override
+    @GetMapping(path = "/save/workout")
     public void saveWorkout(WorkoutDTO workoutDTO) {
         workoutService.saveWorkout(workoutDTO);
     }

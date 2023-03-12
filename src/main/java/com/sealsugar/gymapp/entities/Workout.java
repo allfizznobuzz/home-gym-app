@@ -1,9 +1,7 @@
-package com.sealsugar.gymapp.entity;
+package com.sealsugar.gymapp.entities;
 
 import lombok.*;
-import org.springframework.data.util.ProxyUtils;
 import javax.persistence.*;
-import java.util.Objects;
 import java.util.Set;
 
 import static javax.persistence.GenerationType.SEQUENCE;
@@ -112,18 +110,4 @@ public class Workout {
             inverseJoinColumns = @JoinColumn(name = "workout_session_ID")
     )
     private Set<WorkoutSession> workoutSession;
-
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || ProxyUtils.getUserClass(this) != ProxyUtils.getUserClass(o))
-            return false;
-        Workout workout = (Workout) o;
-        return workoutId != null && Objects.equals(workoutId, workout.workoutId);
-    }
-
-    @Override
-    public int hashCode() {
-        return getClass().hashCode();
-    }
 }

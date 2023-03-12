@@ -1,4 +1,4 @@
-package com.sealsugar.gymapp.entity;
+package com.sealsugar.gymapp.entities;
 
 
 import lombok.Getter;

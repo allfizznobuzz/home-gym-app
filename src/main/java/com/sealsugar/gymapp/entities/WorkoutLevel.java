@@ -1,4 +1,4 @@
-package com.sealsugar.gymapp.entity;
+package com.sealsugar.gymapp.entities;
 
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -12,32 +12,32 @@ import static javax.persistence.GenerationType.SEQUENCE;
 @Getter
 @Setter
 @Entity
-@Table(name = "mechanics")
-public class Mechanics {
+@Table(name = "workout_level")
+public class WorkoutLevel {
 
     @Id
     @SequenceGenerator(
-            name = "mechanics_sequence",
-            sequenceName = "mechanics_sequence",
+            name = "workout_level_sequence",
+            sequenceName = "workout_level_sequence",
             allocationSize = 1
     )
     @GeneratedValue(
             strategy = SEQUENCE,
-            generator = "mechanics_sequence"
+            generator = "workout_level_sequence"
     )
     @Column(
-            name = "mechanics_ID",
+            name = "workout_level_ID",
             updatable = false
     )
-    private Long mechanicsId;
+    private long workoutLevelId;
 
     @Column(
-            name = "type",
+            name = "level",
             columnDefinition = "varchar(255)"
     )
-    private String mechanicsType;
+    private String level;
 
-    public enum MechanicsType {
-        COMPOUND, ISOLATION, NOT_APPLICABLE
+    public enum Level {
+        BEGINNER, INTERMEDIATE, EXPERT
     }
 }
