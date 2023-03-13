@@ -37,11 +37,11 @@ public class Muscle {
     )
     private String muscleName;
 
-    public enum MuscleType {
-        CHEST, LOWER_CHEST, MIDDLE_CHEST, UPPER_CHEST,
-        FOREARMS, LATS, MIDDLE_BACK, LOWER_BACK, NECK,
-        QUADRICEPS, HAMSTRINGS, CALVES, TRICEPS, TRAPS,
-        SHOULDERS, ABDOMINALS, GLUTES, BICEPS, ADDUCTORS,
-        ABDUCTORS
-    }
+//    public enum MuscleType {
+//        CHEST, LOWER_CHEST, MIDDLE_CHEST, UPPER_CHEST,
+//        FOREARMS, LATS, MIDDLE_BACK, LOWER_BACK, NECK,
+//        QUADRICEPS, HAMSTRINGS, CALVES, TRICEPS, TRAPS,
+//        SHOULDERS, ABDOMINALS, GLUTES, BICEPS, ADDUCTORS,
+//        ABDUCTORS
+//    }
 }

@@ -89,19 +89,19 @@ public class Workout {
 
     @ManyToMany
     @JoinTable(
-            name = "exercise_equipment_for_workout",
-            joinColumns = @JoinColumn(name = "workout_ID"),
-            inverseJoinColumns = @JoinColumn(name = "exercise_equipment_ID")
-    )
-    private Set<ExerciseEquipment> equipmentRequired;
-
-    @ManyToMany
-    @JoinTable(
             name = "secondary_workout_muscles",
             joinColumns = @JoinColumn(name = "workout_ID"),
             inverseJoinColumns = @JoinColumn(name = "muscle_ID")
     )
     private Set<Muscle> secondaryWorkoutMuscles;
+
+    @ManyToMany
+    @JoinTable(
+            name = "exercise_equipment_for_workout",
+            joinColumns = @JoinColumn(name = "workout_ID"),
+            inverseJoinColumns = @JoinColumn(name = "exercise_equipment_ID")
+    )
+    private Set<ExerciseEquipment> equipmentRequired;
 
     @ManyToMany
     @JoinTable(

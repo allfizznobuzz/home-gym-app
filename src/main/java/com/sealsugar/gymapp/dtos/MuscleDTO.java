@@ -1,4 +1,4 @@
-package com.sealsugar.gymapp.models;
+package com.sealsugar.gymapp.dtos;
 
 import lombok.Data;
 
@@ -7,5 +7,4 @@ public class MuscleDTO {
 
     private Long muscleId;
     private String muscleName;
-    private String muscleType;
 }

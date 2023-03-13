@@ -1,4 +1,4 @@
-package com.sealsugar.gymapp.models;
+package com.sealsugar.gymapp.dtos;
 
 import lombok.Data;
 

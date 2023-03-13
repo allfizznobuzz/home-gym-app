@@ -1,8 +1,7 @@
 package com.sealsugar.gymapp.services;
 
 import com.sealsugar.gymapp.models.SearchProductCriteria;
-import com.sealsugar.gymapp.entities.Workout;
-import com.sealsugar.gymapp.models.WorkoutDTO;
+import com.sealsugar.gymapp.dtos.WorkoutDTO;
 
 import java.util.List;
 

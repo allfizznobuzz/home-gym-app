@@ -1,7 +1,7 @@
 package com.sealsugar.gymapp.controllers;
 
 import com.sealsugar.gymapp.models.SearchProductCriteria;
-import com.sealsugar.gymapp.models.WorkoutDTO;
+import com.sealsugar.gymapp.dtos.WorkoutDTO;
 import org.springframework.web.bind.annotation.PathVariable;
 
 import javax.validation.Valid;

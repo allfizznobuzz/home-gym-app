@@ -1,8 +1,7 @@
 package com.sealsugar.gymapp.controllers;
 
 import com.sealsugar.gymapp.models.SearchProductCriteria;
-import com.sealsugar.gymapp.entities.Workout;
-import com.sealsugar.gymapp.models.WorkoutDTO;
+import com.sealsugar.gymapp.dtos.WorkoutDTO;
 import com.sealsugar.gymapp.services.WorkoutService;
 import org.springframework.web.bind.annotation.*;
 

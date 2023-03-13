@@ -37,7 +37,7 @@ public class ExerciseType {
     )
     private String type;
 
-    public enum Exercise {
-        CARDIO, OLYMPIC_WEIGHTLIFTING, PLYOMETRICS, POWERLIFTING, STRENGTH, STRETCHING, STRONGMAN
-    }
+//    public enum Exercise {
+//        CARDIO, OLYMPIC_WEIGHTLIFTING, PLYOMETRICS, POWERLIFTING, STRENGTH, STRETCHING, STRONGMAN
+//    }
 }

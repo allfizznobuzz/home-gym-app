@@ -37,7 +37,7 @@ public class Mechanics {
     )
     private String mechanicsType;
 
-    public enum MechanicsType {
-        COMPOUND, ISOLATION, NOT_APPLICABLE
-    }
+//    public enum MechanicsType {
+//        COMPOUND, ISOLATION, NOT_APPLICABLE
+//    }
 }

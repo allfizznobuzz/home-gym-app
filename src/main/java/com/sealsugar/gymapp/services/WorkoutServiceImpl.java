@@ -5,7 +5,7 @@ import com.sealsugar.gymapp.exceptions.InternalFailureException;
 import com.sealsugar.gymapp.exceptions.NotFoundException;
 import com.sealsugar.gymapp.models.SearchProductCriteria;
 import com.sealsugar.gymapp.entities.Workout;
-import com.sealsugar.gymapp.models.WorkoutDTO;
+import com.sealsugar.gymapp.dtos.WorkoutDTO;
 import com.sealsugar.gymapp.repositories.WorkoutRepository;
 import lombok.extern.slf4j.Slf4j;
 import org.modelmapper.ModelMapper;

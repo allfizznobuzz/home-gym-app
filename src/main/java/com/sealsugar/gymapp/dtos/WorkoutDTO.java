@@ -1,8 +1,7 @@
-package com.sealsugar.gymapp.models;
+package com.sealsugar.gymapp.dtos;
 
 import lombok.Data;
 
-import java.util.HashSet;
 import java.util.Set;
 
 @Data
@@ -18,8 +17,8 @@ public class WorkoutDTO {
     private String workoutExampleUrl;
     private ExeciseTypeDTO exerciseType;
     private MechanicsDTO mechanics;
-    private WorkoutDTO workoutLevel;
-    private Set<MuscleDTO> primaryWorkoutMuscleGroup = new HashSet<>();
-    private Set<MuscleDTO> secondaryWorkoutMuscleGroups = new HashSet<>();
-    private Set<ExerciseEquipmentDTO> equipmentRequired = new HashSet<>();
+    private WorkoutLevelDTO workoutLevel;
+    private Set<MuscleDTO> primaryWorkoutMuscles;
+    private Set<MuscleDTO> secondaryWorkoutMuscles;
+    private Set<ExerciseEquipmentDTO> equipmentRequired;
 }
